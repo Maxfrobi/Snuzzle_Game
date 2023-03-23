@@ -1,0 +1,18 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TestWindowsFormsApp_.NET_Framework_
+{
+    internal static class GS
+    {
+        public static Tile[,] VictoryTiles;
+        public static Tile[,] Board;
+        public static List<Tile> PlayerBody;
+        public static int BodyLength;
+        public static List<Tile[,]> PastBoardStates;
+        public static List<List<Tile>> PastPlayerBodies;
+    }
+}
