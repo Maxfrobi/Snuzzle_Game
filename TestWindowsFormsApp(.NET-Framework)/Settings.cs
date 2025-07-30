@@ -15,9 +15,11 @@ namespace TestWindowsFormsApp_.NET_Framework_
 
         public static int BoardHeight = 0;
 
-        public static int CanvasWidth = Math.Min(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+        public static int CanvasWidth = Screen.PrimaryScreen.Bounds.Width; //Math.Min(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
-        public static int CanvasHeight = Math.Min(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+        public static int CanvasHeight = Screen.PrimaryScreen.Bounds.Height; //Math.Min(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+
+        public static int SquareSide = Math.Min(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
         public static int TileHeight = 0;
         public static int TileWidth = 0;

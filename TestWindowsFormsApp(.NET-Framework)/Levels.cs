@@ -22,18 +22,33 @@ namespace TestWindowsFormsApp_.NET_Framework_
              "....." +
              "....." +
              ".v..." +
-             ".....",
+             "....." +
+                "002",
+
+            "005005" +
+                "hnwww" +
+                "wnnnw" +
+                "wwwnw" +
+                "wnsnw" +
+                "wnwww" + // 2
+                "....." +
+                "....." +
+                "....." +
+                ".v..." +
+                "....." +
+                "002",
 
             "004004" +
              "wnww" +
              "nsnn" +
              "nnnw" +
              "hnww" +
-                                  //LEVEL 2
+                            //3
              ".v.." +
              "...v" +
              "...." +
-             "....",
+             "...." +
+                "002",
 
 
 
@@ -43,12 +58,49 @@ namespace TestWindowsFormsApp_.NET_Framework_
                 "nwnww" +
                 "nnsnn" +
                 "nnhnn" +
-                                    //LEVEL 3
+                                    //4
                 "....." +
                 "....." +
                 "....." +
                 "....." +
-                "vvvvv",
+                "vvvvv" +
+                "002",
+
+            "004004" +
+                "nnnn" +
+                "wshn" +
+                "nnsn" +
+                "nnwn" + //5
+                "...v" +
+                "..v." +
+                "v..." +
+                ".v..",
+
+            "005005" +
+                "hs1nn" +
+                "nnwwn" +
+                "nwwwn" +
+                "nwwwn" +
+                "nnnnn" +
+                "....." +       //6
+                "....." +
+                "....." +
+                "....." +
+                ".vvvv" +
+                "002",
+
+            "005005" +
+                "wnnww" +
+                "hn1nw" +
+                "nwnnn" +
+                "nwswn" +
+                "nnnnn" +       // 7
+                ".vv.." +
+                "vv.v." +
+                "....." +
+                "....." +
+                "....." +
+                "002",
 
             "005005" +
              "nnhn1" +
@@ -56,31 +108,200 @@ namespace TestWindowsFormsApp_.NET_Framework_
              "nwsws" +
              "nn2n2" +
              "wwnwn" +
-                                    //LEVEL 4
+                                    // 8
              "....." +
              "....." +
              "....." +
              "....." +
-             "..v.v",
+             "..v.v" +
+                "002",
+            
+            "005005"+
+                "nnnnh" +
+                "nsssn" +
+                "nsssn" +
+                "nsssn" +
+                "nnnnn" +
+                                    // 9
+                "..v.." +   
+                ".v.v." +
+                "v...v" +
+                ".v.v." +
+                "..v.." +
+                "002",
+            "009009" +
+                "wwnsnsnww" +
+                "wnnnsnnnw" +
+                "nnwnnnwnn" +
+                "snnwswnns" +
+                "nsnshsnsn" +
+                "snnwswnns" +
+                "nnwnnnwnn" +
+                "wnnnsnnnw" +
+                "wwnsnsnww" +
+                                        // 10
+                "........." +
+                "........." +
+                "...v.v..." +
+                "..v...v.." +
+                ".......v." +
+                "..v...v.." +
+                "...v.v..." +
+                "........." +
+                "........." +
+                "002",
+            "006006" +
+                "wwwnnw" +
+                "wnnsnw" +
+                "nssnnw" +
+                "wnwwnn" +
+                "whnnnn" +
+                "wwwwww" +
+                "......" +      // 11
+                ".v...." +
+                "vvv..." +
+                "......" +
+                ".v...." +
+                "......" +
+                "002",
+            "005005" +
+                "wnhnw" +
+                "wmwsw" +
+                "w1w1w" +
+                "wnnnw" +
+                "wnwnw" + // 12
+                "....." +
+                "....." +
+                "....." +
+                ".v.v." +
+                ".v.v.",
 
-            "008008" +
-                "hnwwnnnn" +
-                "nnwwnnnn" +
-                "nwwwnnnn" +
-                "n777nnnn" +
-                "nwwwnnnn" +
-                "nnwwnnnn" +
-                "nnwwnnnn" +
-                "nnwwnnnn" +
-                                    //LEVEL 5
-                ".....vvv" +
-                ".....vvv" +
-                ".....vvv" +
-                ".....vvv" +
-                ".....vvv" +
-                ".....vvv" +
-                ".....vvv" +
-                ".....vvv",
+            "005005" +
+                "n1nnn" +
+                "wwnsn" +
+                "nnnhn" +
+                "nnnmn" +
+                "nnnnn" +
+                "vv..." + // 13
+                "....." +
+                ".vv.v" +
+                "....." +
+                "....." +
+                "002",
+
+            "007007" +
+                "nnnnnww" +
+                "nnnnm2n" +
+                "nnhnnww" +
+                "2wwnm2n" +
+                "snwmwww" +
+                "nnw1nnw" +
+                "wnnnnnn" +
+                "......." + // 14
+                "......." +
+                "......." +
+                "......." +
+                "vv....." +
+                "vv..vv." +
+                ".vvvvvv",
+
+            "007007" +
+                "wwwwnww" +
+                "nnnhnww" +
+                "2wnwnww" +
+                "ns2s2sn" +
+                "wwnwnww" +
+                "wwnnnww" +
+                "wwwwwww" + // 15
+                "....v.." +
+                "......." +
+                "..v.v.." +
+                "..v.v.v" +
+                "..v.v.." +
+                "..vvv.." +
+                "......." +
+                "002",
+
+            "010010" +
+                "hwnnnnnnnw" +
+                "8wnnnnnnnw" +
+                "8wnnnnnnnn" +
+                "8wnnwnnnnw" +
+                "8wnnnnnnnn" +
+                "8wnnnnnnnn" +
+                "8wnnnnnwwn" +
+                "5wnnnnnwwn" +
+                "nnnnnnnnnn" +
+                "wwwwwwwwww" +
+                "..vvvvvvv." + //16
+                "..vvvvvvv." +
+                "..vvvvvvvv" +
+                "..vv.vvvv." +
+                "..vvvvvvvv" +
+                "..vvvvvvvv" +
+                "..vvvvv..v" +
+                "..vvvvv..v" +
+                ".........." +
+                ".........." +
+                "002",
+
+            "005005" +
+                "nnnnn" +
+                "nnsss" +
+                "nshsn" +
+                "nwnnn" +
+                "1ns1w" + // 17
+                "....v" +
+                "v...v" +
+                ".v..." +
+                "v..vv" +
+                ".vvv.",
+
+            "010010" +
+                "nnnwnnwn1n" +
+                "nsn1nnnnw1" +
+                "nnnwnnwn1n" +
+                "wwwwnnwwww" +
+                "nn1mh1wnnw" +
+                "nwwwnnssnn" +
+                "nwwwnn1nnn" +
+                "nwwwnnwnnn" +
+                "nnnnnnwwww" +
+                "nnnnnnnnnn" + // 18
+                ".........." +
+                ".........." +
+                ".........." +
+                ".........." +
+                ".........." +
+                ".........v" +
+                ".........v" +
+                ".........v" +
+                ".........." +
+                "vvvvvvvvvv" +
+                "002",
+            "011011" +
+                "nnnnnhnnnnn" +
+                "nnnssmssnnn" +
+                "nnns1sssnnn" +
+                "nnn1ssssnnn" +
+                "nnnss1ssnnn" +
+                "nnnsss1snnn" +
+                "nnnss1ssnnn" +
+                "nnns1sssnnn" +
+                "nnnsss1snnn" +
+                "nnnnnnnnnnn" + // 19
+                "nnnnnnnnnnn" +
+                "..........." +
+                "vv.......vv" +
+                "v.......vvv" +
+                ".......vvvv" +
+                "vv.......vv" +
+                "vvv.......v" +
+                "vv.......vv" +
+                "v.......vvv" +
+                "vvv.......v" +
+                "..........." +
+                "vvvvvvvvvvv",
 
 
             "010010" +
@@ -94,8 +315,8 @@ namespace TestWindowsFormsApp_.NET_Framework_
                 "n1snnnnnnn" +
                 "wssnwwwwwn" +
                 "wnnnnnnnnn" +
-
-                ".........v" +
+                                          
+                ".........v" + // 20
                 "v........." +
                 ".........v" +
                 "v........." +
@@ -104,20 +325,17 @@ namespace TestWindowsFormsApp_.NET_Framework_
                 ".........." +
                 ".........." +
                 "..v......." +
-                ".vvvvvvvv." ,
-
-            "005002" +
-                "nnnnn" +
-                "nnnnn" +
-                "....." +
-                ".....",
-            "002002nnnn....",
-            "002002nnnn....",
-            "001001n."              //LEVEL 10 -- Editor
+                ".vvvvvvvv." +
+                "002",
+            "001001n.002"
         };
-        static int[] bodylength = { 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-        public static bool[] replenishfood = { false, false, false, false, false, false, false, false, false, false };
-        public static Tile[,] GetVictoryTiles(int Levelchoice)
+
+        //public static bool[] replenishfood = { false, false, false, false, false, false, false, false, false, false };
+        public static Tile[,] GetVictoryTiles(int LevelChoice)
+        {
+            return GetVictoryTiles(LevelArray[LevelChoice]);
+        }
+        public static Tile[,] GetVictoryTiles(string Level)
         {
             Tile[,] victorytiles = new Tile[Set.BoardWidth, Set.BoardHeight];
             int StartingIndex = (Set.BoardWidth * Set.BoardHeight) + 6;
@@ -125,7 +343,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
             {
                 for(int y = 0; y < Set.BoardHeight; y++)
                 {
-                    if (LevelArray[Levelchoice][StartingIndex] == 'v')
+                    if (Level[StartingIndex] == 'v')
                     {
                         victorytiles[x, y] = new VictoryTile(x, y);
                     }
@@ -140,20 +358,37 @@ namespace TestWindowsFormsApp_.NET_Framework_
         }
         public static int GetLevelBody(int LevelChoice)
         {
-            return bodylength[LevelChoice];
+            return GetLevelBody(LevelArray[LevelChoice]);
+        }
+        public static int GetLevelBody(string Level)
+        {
+            string BodyLengthStr = "";
+            for (int i = Level.Length - 3; i < Level.Length; i++)
+            {
+                BodyLengthStr += Level[i];
+            }
+            if (int.TryParse(BodyLengthStr, out int BodyLength))
+            {
+                return BodyLength;
+            }
+            else { return 2; }
         }
         public static Tile[,] GetLevel(int LevelChoice)
+        {
+            return GetLevel(LevelArray[LevelChoice]);
+        }
+        public static Tile[,] GetLevel(string Level)
         {
             string WidthValue = "";
             for (int i = 0; i < 3; i++)
             {
-                WidthValue += LevelArray[LevelChoice][i];
+                WidthValue += Level[i];
             }
             Set.BoardWidth = Convert.ToInt32(WidthValue);
             string HeightValue = "";
             for (int i = 3; i < 6; i++)
             {
-                HeightValue += LevelArray[LevelChoice][i];
+                HeightValue += Level[i];
             }
             Set.BoardHeight = Convert.ToInt32(HeightValue);
 
@@ -164,7 +399,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
             {
                 for (int y = 0; y < Set.BoardHeight; y++)
                 {
-                    switch (LevelArray[LevelChoice][LevelTileIndex])
+                    switch (Level[LevelTileIndex])
                     {
                         case 'n':
                             Board[x, y] = new Empty(x, y);
@@ -181,8 +416,20 @@ namespace TestWindowsFormsApp_.NET_Framework_
                         case 'h':
                             Board[x, y] = new Head(x, y);
                             break;
+                        case 'u':
+                            Board[x, y] = new Mover(x, y, 0, -1);
+                            break;
+                        case 'd':
+                            Board[x, y] = new Mover(x, y, 0, 1);
+                            break;
+                        case 'l':
+                            Board[x, y] = new Mover(x, y, -1, 0);
+                            break;
+                        case 'r':
+                            Board[x, y] = new Mover(x, y, 1, 0);
+                            break;
                         default:
-                            Board[x, y] = new Edible(x, y, Convert.ToInt32(Convert.ToString(LevelArray[LevelChoice][LevelTileIndex])));
+                            Board[x, y] = new Edible(x, y, Convert.ToInt32(Convert.ToString(Level[LevelTileIndex])));
                             break;
                     }
                     LevelTileIndex++;

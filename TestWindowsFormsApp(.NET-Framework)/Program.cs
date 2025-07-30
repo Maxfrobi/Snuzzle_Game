@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -27,33 +28,71 @@ namespace TestWindowsFormsApp_.NET_Framework_
         {
             GS.BodyLength = GS.PlayerBody.Count;
 
-            if (CheckMovablePrime(GS.PlayerBody[0].X, GS.PlayerBody[0].Y))
+            if (CheckMovablePrime(GS.PlayerBody[0], Con.DeltaX, Con.DeltaY))
             {
-                ChangeBoardPrime(GS.PlayerBody[0].X, GS.PlayerBody[0].Y);
+                ChangeBoardPrime(GS.PlayerBody[0], Con.DeltaX, Con.DeltaY);
+                Data.PlayMoveSound();
                 MoveSnakeTailPrime();
-                GS.PlayerBody[0].X += Con.DeltaX;
-                GS.PlayerBody[0].Y += Con.DeltaY;
+                MoveMovers();
+
                 Con.BoardStateIndex++;
                 MakeGameState();
             }
-            
+            else
+            {
+                Data.PlaySound(Data.WallHitSound, Data.SoundType.GameSFX, 0.15f);
+            }
             AddPlayerToBoard();
             ResetValues();
-            Con.Victory = CheckWin();
+            Con.Victory = CheckWin().Item2;
+            int CurrentVicTiles = CheckWin().Item1;
+            if (Con.Victory && mainform.VictoryScreen.Enabled == false) { Data.PlaySound(Data.VictorySound, Data.SoundType.GameSFX, 1); } 
+            else if (CurrentVicTiles > Con.PastCoveredVicTiles) { Data.PlaySound(Data.VictoryTileActivation, Data.SoundType.GameSFX, 5); }
+            
+            Con.PastCoveredVicTiles = CurrentVicTiles;
         }
-        public static bool CheckWin()
+        public static void MoveMovers()
         {
+            List<Mover> TempMoverList = new List<Mover>();
+            foreach (Tile tile in GS.Board)
+            {
+                if (tile is Mover)
+                {
+                    TempMoverList.Add(tile as Mover);
+                }
+            }
+            foreach (Mover m in TempMoverList)
+            {
+                if (CheckMovablePrime(m, m.DeltaX, m.DeltaY))
+                {
+                    ChangeBoardPrime(m, m.DeltaX, m.DeltaY);
+                }
+                else
+                {
+                    m.DeltaX *= -1;
+                    m.DeltaY *= -1;
+                }
+            }
+        }
+        public static (int, bool) CheckWin()
+        {
+            bool ReturnVal = true;
+            int Count = 0;
             foreach (Tile tile in GS.VictoryTiles)
             {
                 if (tile is VictoryTile)
                 {
                     if (GS.Board[tile.X, tile.Y] is Empty || GS.Board[tile.X, tile.Y] is Edible)
                     {
-                        return false;
+                        ReturnVal = false;
+                    }
+                    else
+                    {
+                        Count++;
                     }
                 }
             }
-            return true;
+            return (Count, ReturnVal);
         }
         public static void LoadPastGameState()
         {
@@ -85,27 +124,25 @@ namespace TestWindowsFormsApp_.NET_Framework_
             GS.PastPlayerBodies[Con.BoardStateIndex] = CopyBody(GS.PlayerBody);
         }
 
-        public static bool CheckMovablePrime(int oldX, int oldY)
+        public static bool CheckMovablePrime(Tile ToCheck, int DeltaX, int DeltaY)
         {
-            if(Con.DeltaX == 0 && Con.DeltaY == 0)
+            int oldX = ToCheck.X;
+            int oldY = ToCheck.Y;
+            if(DeltaX == 0 && DeltaY == 0)
             {
                 return false;
             }
-            int newX = oldX + Con.DeltaX;
-            int newY = oldY + Con.DeltaY;
-            if (newX >= Set.BoardWidth || newY >= Set.BoardHeight)
-            {
-                return false;
-            }
-            if (newX < 0 || newY < 0)
+            int newX = oldX + DeltaX;
+            int newY = oldY + DeltaY;
+            if (newX >= Set.BoardWidth || newY >= Set.BoardHeight || newX < 0 || newY < 0) // Bounds Check
             {
                 return false;
             }
             if (GS.Board[newX, newY] is Movable)
             {
-                return (CheckMovablePrime(newX, newY));
+                return (CheckMovablePrime(GS.Board[newX, newY], DeltaX, DeltaY));
             }
-            if (GS.Board[newX, newY] is Wall || GS.Board[newX, newY] is Body)
+            if (GS.Board[newX, newY] is Wall || GS.Board[newX, newY] is Body || GS.Board[newX, newY] is Head)
             {
                 return false;
             }
@@ -130,19 +167,29 @@ namespace TestWindowsFormsApp_.NET_Framework_
 
         public static void MoveSnakeTailPrime()
         {
+            GS.PlayerBody[0].X -= Con.DeltaX;
+            GS.PlayerBody[0].Y -= Con.DeltaY;
             for (int i = GS.PlayerBody.Count - 1; i > 0; i--)
             {
                 GS.PlayerBody[i].X = GS.PlayerBody[i - 1].X;
                 GS.PlayerBody[i].Y = GS.PlayerBody[i - 1].Y;
             }
+            GS.PlayerBody[0].X += Con.DeltaX;
+            GS.PlayerBody[0].Y += Con.DeltaY;
         }
-        public static void ChangeBoardPrime(int oldX, int oldY)
+        public static void ChangeBoardPrime(Tile ToMove, int DeltaX, int DeltaY)
         {
-            if (GS.Board[oldX + Con.DeltaX, oldY + Con.DeltaY] is Movable)
+            int oldX = ToMove.X;
+            int oldY = ToMove.Y;
+            
+            if (GS.Board[oldX + DeltaX, oldY + DeltaY] is Movable || GS.Board[oldX + DeltaX, oldY + DeltaY] is Body)
             {
-                ChangeBoardPrime(oldX + Con.DeltaX, oldY + Con.DeltaY);
+                ChangeBoardPrime(GS.Board[oldX + DeltaX, oldY + DeltaY], DeltaX, DeltaY);
             }
-            GS.Board[oldX + Con.DeltaX, oldY + Con.DeltaY] = GS.Board[oldX, oldY];
+            ToMove.X += DeltaX;
+            ToMove.Y += DeltaY;
+            GS.Board[oldX + DeltaX, oldY + DeltaY] = GS.Board[oldX, oldY];
+            GS.Board[oldX, oldY] = new Empty(oldX, oldY);
         }
         public static void EatTilePrime(int X, int Y)
         {
@@ -211,16 +258,18 @@ namespace TestWindowsFormsApp_.NET_Framework_
             }
             return (newBody);
         }
-        public static void InitializeGame(int level)
+        public static void InitializeGame(string level)
         {
             Con.Playing = true;
+            Con.Victory = false;
+
             Con.BoardStateIndex = 0;
 
             GS.PastPlayerBodies = new List<List<Tile>>();
             GS.PastBoardStates = new List<Tile[,]>();
             GS.PastBoardStates.Add(null);
             GS.PastPlayerBodies.Add(new List<Tile>());
-            
+
             GS.Board = Levels.GetLevel(level);
             GS.BodyLength = Levels.GetLevelBody(level);
             GS.PlayerBody = ConstructBody(GS.BodyLength);
@@ -228,19 +277,24 @@ namespace TestWindowsFormsApp_.NET_Framework_
 
             Set.BoardWidth = GS.Board.GetLength(0);
             Set.BoardHeight = GS.Board.GetLength(1);
-            Set.TileHeight = Set.CanvasHeight / Set.BoardHeight;
-            Set.TileWidth = Set.CanvasWidth / Set.BoardWidth;
+            Set.TileHeight = Set.SquareSide / Set.BoardHeight; //Here lies opportunity
+            Set.TileWidth = Set.SquareSide / Set.BoardWidth;
 
             GS.VictoryTiles = Levels.GetVictoryTiles(level);
 
-            Con.FoodReplenish = Levels.replenishfood[level];
-            if (Con.FoodReplenish)
-            {
-                Program.ReplenishFoodPrime();
-            }
+            //Con.FoodReplenish = level < Levels.replenishfood.Length? Levels.replenishfood[level] : false;
+            //if (Con.FoodReplenish)
+            //{
+            //    Program.ReplenishFoodPrime();
+            //}
             Con.BoardStateIndex++;
             MakeGameState();
             mainform.RefreshBoard();
+        }
+        public static void InitializeGame(int level)
+        {
+            Con.CurrentLevel = level;
+            InitializeGame(Levels.LevelArray[level]);
         }
         public static List<Tile> ConstructBody(int BodyLength)
         {
@@ -257,7 +311,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
             Body[] bodies = new Body[BodyLength];
             for (int i = 0; i < BodyLength; i++)
             {
-                bodies[i] = new Body(1000, 1000);
+                bodies[i] = new Body(head.X, head.Y);
                 Snake.Add(bodies[i]);
             }
             return Snake;
@@ -282,6 +336,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
                     GS.Board[bodypart.X, bodypart.Y] = bodypart;
                 }
             }
+            GS.Board[GS.PlayerBody[0].X, GS.PlayerBody[0].Y] = GS.PlayerBody[0];
         }
     }
 }

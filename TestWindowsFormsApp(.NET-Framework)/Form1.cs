@@ -7,20 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
+using TestWindowsFormsApp_.NET_Framework_.Properties;
 
 namespace TestWindowsFormsApp_.NET_Framework_
 {
     public partial class Form1 : Form
     {
-        public Pen OutLiner = new Pen(Color.White);
-        public Font font1 = new Font("Arial", 80, FontStyle.Bold, GraphicsUnit.Point);
+        //public Pen OutLiner = new Pen(Color.White);
+        public Font VictoryFont = new Font("Arial", 80, FontStyle.Bold, GraphicsUnit.Point);
         public Font EdibleFont = new Font("Arial", 25, FontStyle.Bold, GraphicsUnit.Point);
+        public Panel LeftScreen = new Panel();
+        public Panel RightScreen = new Panel();
         public Button EditorSelector = new Button();
+        public Panel VictoryScreen = new Panel();
         public TableLayoutPanel LevelSelectorPanel;
-        public TableLayoutPanel EditorMaker;
+        public Panel EditorMakerPanel;
+        public Panel ImportLevelPanel;
         public TableLayoutPanel EditorOverlay;
-
-        public Image VariableImage;
         StringFormat stringFormat = new StringFormat();
         public Form1()
         {
@@ -30,75 +35,43 @@ namespace TestWindowsFormsApp_.NET_Framework_
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.TopMost = true;
+            //this.TopMost = true;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.Location = new Point((Screen.PrimaryScreen.Bounds.Size.Width / 2) - (Set.CanvasWidth / 2), 0);
-            this.Size = new Size(Set.CanvasWidth, Set.CanvasWidth);
+            this.Location = new Point(0, 0);
+            this.MaximumSize = new Size(Set.CanvasWidth, Set.CanvasHeight);
+            this.MinimumSize = new Size(Set.CanvasWidth, Set.CanvasHeight);
+            this.Size = new Size(Set.CanvasWidth, Set.CanvasHeight);
             this.DoubleBuffered = true;
             this.KeyDown += new KeyEventHandler(LeaveGame);
         }
 
-        public void MakeLevelSelector(int numButtons)
+        public void ImportLevelButton_Click(object sender, EventArgs e)
         {
-            LevelSelectorPanel = new TableLayoutPanel();
-            LevelSelectorPanel.SuspendLayout();
-            LevelSelectorPanel.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
-            LevelSelectorPanel.Dock = DockStyle.Fill;
-            LevelSelectorPanel.Location = new Point(0, 0);
-            int ButtonsPerSide = (int)Math.Sqrt(numButtons);
-            LevelSelectorPanel.RowCount = ButtonsPerSide + 1;
-            LevelSelectorPanel.Enabled = true;
-            LevelSelectorPanel.Visible = true;
-            pictureBox1.Controls.Add(LevelSelectorPanel);
-            List<Button> ButtonList = new List<Button>();
-            for (int i = 0; i < numButtons; i++)
+            Data.PlaySound(Data.ButtonClickSound, Data.SoundType.MenuSFX, 1);
+            Button ImportButton = (Button)sender;
+            Data.PlaySound(Data.ButtonClickSound, Data.SoundType.MenuSFX, 1);
+            TextBox ImportTextBox = ImportButton.Parent.Controls.OfType<TextBox>().FirstOrDefault();
+            DeactivateEditorMaker();
+
+            try
             {
-                ButtonList.Add(new Button());
-                ButtonList[i].Text = (i + 1).ToString();
-                ButtonList[i].Tag = i;
-                ButtonList[i].Dock = DockStyle.Fill;
-                LevelSelectorPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / ButtonsPerSide));
-                LevelSelectorPanel.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / ButtonsPerSide));
-                LevelSelectorPanel.Controls.Add(ButtonList[i]);
-                ButtonList[i].Click += new EventHandler(LevelSelector_Click);
+
+                Program.InitializeGame(ImportTextBox.Text);
             }
-            
-            EditorSelector = new Button();
-            EditorSelector.Enabled = true;
-            EditorSelector.Visible = true;
-            EditorSelector.Text = "Level Editor";
-            EditorSelector.Dock = DockStyle.Fill;
-            EditorSelector.Click += new EventHandler(InitEditorSelection);
-
-            LevelSelectorPanel.Controls.Add(EditorSelector, ButtonsPerSide / 2, ButtonsPerSide);
-            LevelSelectorPanel.ResumeLayout();
+            catch
+            {
+                ImportTextBox.Text = "Invalid Level Code";
+                ActivateEditorMaker();
+            }
         }
-        public void InitEditorSelection(object sender, EventArgs e)
-        {
-            DeactivateLevelSelector();
-            EditorMaker = new TableLayoutPanel();
-            pictureBox1.Controls.Add(EditorMaker);
-            EditorMaker.Size = new Size(EditorMaker.Parent.Size.Width / 2, EditorMaker.Parent.Size.Height / 2);
-            EditorMaker.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-            EditorMaker.ColumnCount = 3;
-            TextBox BoardHeightInput = new TextBox() { Text = "10"};
-            BoardHeightInput.TabStop = false;
-            TextBox BoardWidthInput = new TextBox() { Text = "10" };
-            BoardWidthInput.TabStop = false;
-            Button BuildEditor = new Button() { Text = "Build Clean Slate"};
-            BuildEditor.TabStop = false;
 
-            BuildEditor.Click += new EventHandler(BuildEditor_Click);
-            EditorMaker.Controls.Add(BoardHeightInput);       
-            EditorMaker.Controls.Add(BoardWidthInput);
-            EditorMaker.Controls.Add(BuildEditor);
-        }
         public void BuildEditor_Click(object sender, EventArgs e)
         {
+            Data.PlaySound(Data.ButtonClickSound, Data.SoundType.MenuSFX, 1);
             this.ActiveControl = null;
             int Index = 0;
             int[] SideLengths = new int[2];
-            foreach(Control t in EditorMaker.Controls)
+            foreach(Control t in EditorMakerPanel.Controls)
             {
                 if(!(t is TextBox))
                 {
@@ -128,79 +101,75 @@ namespace TestWindowsFormsApp_.NET_Framework_
             string BoardStr = new string('n', SideLengths[0] * SideLengths[1]);
             string VicsStr = new string('.', SideLengths[0] * SideLengths[1] - 1);
             VicsStr += 'v';
-            Levels.LevelArray[9] = WidthStr + HeightStr + BoardStr + VicsStr;
-            Program.InitializeGame(9);
+            Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1] = WidthStr + HeightStr + BoardStr + VicsStr;
+            Program.InitializeGame(Levels.LevelArray.GetLength(0) - 1);
             InitializeEditorOverlay(SideLengths);
         }
-        public void InitializeEditorOverlay(int[] SideLengths)
-        {
-            EditorOverlay = new TableLayoutPanel();
-            EditorOverlay.Visible = true;
-            EditorOverlay.BackColor = Color.Transparent;
-            
-            pictureBox1.Controls.Add(EditorOverlay);
-            EditorOverlay.Dock = DockStyle.Fill;
-            EditorOverlay.SuspendLayout();
-            EditorOverlay.ColumnCount = SideLengths[1];
-            EditorOverlay.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-            for (int i = 0; i< SideLengths[0]; i++)
-            {
-                for(int j = 0; j< SideLengths[1]; j++)
-                {
-                    EditorOverlay.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100 / SideLengths[0]));
-                    EditorOverlay.RowStyles.Add(new RowStyle(SizeType.Percent, 100 / SideLengths[1]));
-                    Button mybutton = new Button() { Tag = new int[2] { i, j} };
-                    mybutton.Dock = DockStyle.Fill;
-                    mybutton.Margin = new Padding(0);
-                    mybutton.Click += new EventHandler(LevelEditorButton_Click);
-                    mybutton.FlatStyle = FlatStyle.Flat;
-                    mybutton.FlatAppearance.BorderColor = BackColor;
-                    mybutton.FlatAppearance.MouseOverBackColor = Color.FromArgb(0, Color.White);
-                    mybutton.FlatAppearance.MouseDownBackColor = BackColor;
-                    EditorOverlay.Controls.Add(mybutton);
-                }
-            }
-            EditorOverlay.ResumeLayout();
-        }
+        
         public void LevelEditorButton_Click(object sender, EventArgs e)
         {
             this.ActiveControl = null;
             Button converter = sender as Button;
             int[] Pos = converter.Tag as int[];
-            int maxheight = Convert.ToInt32(Levels.LevelArray[9].Substring(0, 3));
-            int maxwidth = Convert.ToInt32(Levels.LevelArray[9].Substring(3, 3));
-            if (Con.VicEdit)
+            int maxheight = Convert.ToInt32(Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1].Substring(0, 3));
+            int maxwidth = Convert.ToInt32(Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1].Substring(3, 3));
+            if (!Con.VicEdit)
             {
-                char CurrentTile = Levels.LevelArray[9][6 + Pos[0] + maxheight * Pos[1]];
-                StringBuilder LevelCopy = new StringBuilder(Levels.LevelArray[9]);
+                char CurrentTile = Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1][6 + Pos[0] + maxheight * Pos[1]];
+                StringBuilder LevelCopy = new StringBuilder(Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1]);
                 LevelCopy[6 + Pos[0] + maxheight * Pos[1]] = Levels.TileTypeCycler[(Array.IndexOf(Levels.TileTypeCycler, CurrentTile) + 1) % Levels.TileTypeCycler.Length];
-                Levels.LevelArray[9] = LevelCopy.ToString();
+                Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1] = LevelCopy.ToString();
             }
             else
             {
-                char CurrentVic = Levels.LevelArray[9][6 + maxheight * maxwidth + Pos[0] + maxheight * Pos[1]];
-                StringBuilder LevelCopy = new StringBuilder(Levels.LevelArray[9]);
+                char CurrentVic = Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1][6 + maxheight * maxwidth + Pos[0] + maxheight * Pos[1]];
+                StringBuilder LevelCopy = new StringBuilder(Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1]);
                 LevelCopy[6 + maxheight * maxwidth + Pos[0] + maxheight * Pos[1]] = CurrentVic == 'v'?  '.' : 'v';
-                Levels.LevelArray[9] = LevelCopy.ToString();
+                Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1] = LevelCopy.ToString();
             }
-            Program.InitializeGame(9);
+            Program.InitializeGame(Levels.LevelArray.GetLength(0) - 1);
         }
         private void LevelSelector_Click(object sender, EventArgs e)
         {
+            Data.PlaySound(Data.ButtonClickSound, Data.SoundType.MenuSFX, 1);
             Button senderConversion = sender as Button;
-            DeactivateLevelSelector();
-            Program.InitializeGame(Convert.ToInt32(senderConversion.Tag));
-
+            //if(Con.PlayedLevels.Contains(Convert.ToInt32(senderConversion.Tag)) || Con.NextLevel == Convert.ToInt32(senderConversion.Tag))
+            //{
+                DeactivateLevelSelector();
+                Program.InitializeGame(Convert.ToInt32(senderConversion.Tag));
+                Con.NextLevel = Convert.ToInt32(senderConversion.Tag) + 1;
+                Data.PlaySound(Data.BackGroundMusic, Data.SoundType.BGMusic, 1f);
+            //}
         }
         public void DeactivateLevelSelector()
         {
-            LevelSelectorPanel.Visible = false;
-            LevelSelectorPanel.Enabled = false;
+            if(LevelSelectorPanel != null)
+            {
+                LevelSelectorPanel.Visible = false;
+                LevelSelectorPanel.Enabled = false;
+            }
         }
         public void DeactivateEditorMaker()
         {
-            EditorMaker.Visible = false;
-            EditorMaker.Enabled = false;
+            if(ImportLevelPanel != null)
+            {
+                ImportLevelPanel.Visible = false;
+                ImportLevelPanel.Enabled = false;
+            }
+            if(EditorMakerPanel != null)
+            {
+                EditorMakerPanel.Visible = false;
+                EditorMakerPanel.Enabled = false;
+            }
+        }
+        public void ActivateEditorMaker()
+        {
+            LeftScreen.BackgroundImage = Data.ImportExplanation;
+            RightScreen.BackgroundImage= Data.EditorExplanation;   
+            ImportLevelPanel.Visible = true;
+            ImportLevelPanel.Enabled = true;
+            EditorMakerPanel.Visible = true;
+            EditorMakerPanel.Enabled = true;
         }
         public void LeaveGame(object sender, KeyEventArgs e)
         {
@@ -212,7 +181,16 @@ namespace TestWindowsFormsApp_.NET_Framework_
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
+            //if(e.KeyCode == GS.OppositeLastKeyPressed)
+            //{
+            //    return;
+            //}
             e.SuppressKeyPress = true;
+            if(e.KeyCode == Keys.M)
+            {
+                if(Data.SoundPlayer.PlaybackState == PlaybackState.Playing) Data.SoundPlayer.Pause();
+                else Data.SoundPlayer.Play();
+            }
             if (Con.Playing)
             {
                 switch (e.KeyCode)
@@ -221,7 +199,15 @@ namespace TestWindowsFormsApp_.NET_Framework_
                         Con.DeltaY = -1;
                         Program.TickStep();
                         break;
+                    case Keys.Up: //Duplicates for arrow keys
+                        Con.DeltaY = -1;
+                        Program.TickStep();
+                        break;
                     case Keys.S:
+                        Con.DeltaY = 1;
+                        Program.TickStep();
+                        break;
+                    case Keys.Down:
                         Con.DeltaY = 1;
                         Program.TickStep();
                         break;
@@ -229,22 +215,39 @@ namespace TestWindowsFormsApp_.NET_Framework_
                         Con.DeltaX = -1;
                         Program.TickStep();
                         break;
+                    case Keys.Left:
+                        Con.DeltaX = -1;
+                        Program.TickStep();
+                        break;
                     case Keys.D:
+                        Con.DeltaX = 1;
+                        Program.TickStep();
+                        break;
+                    case Keys.Right:
                         Con.DeltaX = 1;
                         Program.TickStep();
                         break;
                     case Keys.Back:
                         Con.BoardStateIndex--;
+                        Data.PlaySound(Data.ReverseSound, Data.SoundType.GameSFX, 1f);
                         Program.LoadPastGameState();
                         break;
                     case Keys.Space:
-                        EditorOverlay.Visible = !EditorOverlay.Visible;
+                        if(EditorOverlay != null) EditorOverlay.Visible = !EditorOverlay.Visible;
                         break;
                     case Keys.V:
                         Con.VicEdit = !Con.VicEdit;
                         break;
                     case Keys.Enter:
-                        Console.WriteLine(Levels.LevelArray[9]);
+                        Console.WriteLine("▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄\nYour Custom Level Code:\n" + Levels.LevelArray[Levels.LevelArray.GetLength(0) - 1] + "\n▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ▄ ");
+                        break;
+                    case Keys.B:
+                        Con.Playing = false;
+                        Con.Victory = false;
+                        DisableContinueButton();
+                        DeactivateEditorMaker();
+                        DeactivateEditorOverlay();
+                        ActivateLevelSelector();
                         break;
                 }
             }
@@ -252,14 +255,9 @@ namespace TestWindowsFormsApp_.NET_Framework_
         }
         public void InitializeForm()
         {
-            pictureBox1.Dock = DockStyle.Fill;
-            
-            ContinueButton.Location = new Point(Set.CanvasWidth / 2 - ContinueButton.Width / 2, Set.CanvasHeight / 2 + 50);
-            pictureBox1.Controls.Add(ContinueButton);
-
             MakeLevelSelector(Levels.LevelArray.Length - 1);
-
-            pictureBox1.Refresh();
+            
+            //pictureBox1.Refresh();
         }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
@@ -273,10 +271,10 @@ namespace TestWindowsFormsApp_.NET_Framework_
                 {
                     for (int x = 0; x < Set.BoardWidth; x++)
                     {
-                        VariableImage = GS.Board[x, y].GetImage();
+                        Image VariableImage = GS.Board[x, y].GetImage();
                         //g.FillRectangle(VariableImage, x * Set.TileWidth, y * Set.TileHeight, Set.TileWidth, Set.TileHeight);
                         //g.DrawRectangle(OutLiner, x * Set.TileWidth, y * Set.TileHeight, Set.TileWidth - Set.OutLineThickness, Set.TileHeight - Set.OutLineThickness);
-                        g.DrawImage(VariableImage, new Rectangle(x * Set.TileWidth, y * Set.TileHeight, Set.TileWidth, Set.TileHeight), 0, 0, 160, 160, GraphicsUnit.Pixel);
+                        g.DrawImage(VariableImage, new Rectangle(x * Set.TileWidth, y * Set.TileHeight, Set.TileWidth + 1, Set.TileHeight + 1), 0, 0, 160, 160, GraphicsUnit.Pixel);
                         if (GS.Board[x, y] is Edible)
                         {
                             SolidBrush TextBrush = new SolidBrush(Color.Black);
@@ -288,17 +286,36 @@ namespace TestWindowsFormsApp_.NET_Framework_
                     }
                 }
             }
+            if(GS.PlayerBody != null)
+            {
+                for(int i = 0; i < GS.PlayerBody.Count - 1; i++)
+                {
+                    if (GS.PlayerBody[i + 1].X == 1000)
+                    {
+                        int DistantBodyCount = GS.PlayerBody.Count - i;
+                        for(int j = 0; j < DistantBodyCount; j++)
+                        {
+                            g.DrawImage(GS.PlayerBody[i].GetImage(), new Rectangle(GS.PlayerBody[i].X * Set.TileWidth - 15 * j, GS.PlayerBody[i].Y * Set.TileHeight - 15 * j, Set.TileWidth, Set.TileHeight));
+                        }
+                        //g.FillEllipse(new SolidBrush(Color.DarkGreen), new Rectangle(GS.PlayerBody[i].X * Set.TileWidth, GS.PlayerBody[i].Y * Set.TileHeight, Set.TileWidth, Set.TileHeight));
+                        break;
+                    }
+                    else
+                    {
+                        //g.DrawLine(new Pen(Color.Red) { Width = 10 }, (GS.PlayerBody[i].X + 0.5f) * Set.TileWidth, (GS.PlayerBody[i].Y + 0.5f) * Set.TileHeight, (GS.PlayerBody[i + 1].X + 0.5f) * Set.TileWidth, (GS.PlayerBody[i + 1].Y + 0.5f) * Set.TileHeight);
+                    }
+                }
+            }
         }
 
         public void DrawVictoryTiles(Graphics g)
         {
             if (GS.VictoryTiles != null)
             {
-                DrawEmptyVic(g);
-                DrawActivatedVic(g);
+                DrawVicTiles(g);
             }
         }
-        public void DrawActivatedVic(Graphics g)
+        public void DrawVicTiles(Graphics g)
         {
             foreach (Tile tile in GS.VictoryTiles)
             {
@@ -308,35 +325,25 @@ namespace TestWindowsFormsApp_.NET_Framework_
                     {
                         //OutLiner = new Pen(Color.Gold, Set.OutLineThickness / 2);
                         //g.DrawRectangle(OutLiner, tile.X * Set.TileWidth - Set.OutLineThickness / 4, tile.Y * Set.TileHeight - Set.OutLineThickness / 4, Set.TileWidth - Set.OutLineThickness / 2, Set.TileHeight - Set.OutLineThickness / 2);
-                        g.DrawImage(Sprites.YesVicImage, new Rectangle(tile.X * Set.TileWidth, tile.Y * Set.TileHeight, Set.TileWidth, Set.TileHeight));
+                        g.DrawImage(Data.YesVicImage, new Rectangle(tile.X * Set.TileWidth, tile.Y * Set.TileHeight, Set.TileWidth + 1, Set.TileHeight + 1));
                     }
-                }
-            }
-        }
-        public void DrawEmptyVic(Graphics g)
-        {
-            foreach (Tile tile in GS.VictoryTiles)
-            {
-                if (tile is VictoryTile)
-                {
-                    if (GS.Board[tile.X, tile.Y] is Empty || GS.Board[tile.X, tile.Y] is Edible)
+                    else
                     {
-                        //OutLiner = new Pen(Color.Gray, Set.OutLineThickness / 2);
-                        //g.DrawRectangle(OutLiner, tile.X * Set.TileWidth - Set.OutLineThickness / 4, tile.Y * Set.TileHeight - Set.OutLineThickness / 4, Set.TileWidth - Set.OutLineThickness / 2, Set.TileHeight - Set.OutLineThickness / 2);
-                        g.DrawImage(Sprites.UnVicImage, new Rectangle(tile.X * Set.TileWidth, tile.Y * Set.TileHeight, Set.TileWidth, Set.TileHeight));
+                        g.DrawImage(Data.UnVicImage, new Rectangle(tile.X * Set.TileWidth, tile.Y * Set.TileHeight, Set.TileWidth + 1, Set.TileHeight + 1));
                     }
                 }
             }
         }
+        
         public void DrawVictory(Graphics g)
         {
-            string text1 = "Victory!";
-            
-            Rectangle rect1 = new Rectangle(0, 0, Set.CanvasWidth, Set.CanvasHeight);
-            stringFormat.Alignment = StringAlignment.Center;
-            stringFormat.LineAlignment = StringAlignment.Center;
-            g.DrawString(text1, font1, Brushes.Blue, rect1, stringFormat);
-            g.DrawRectangle(Pens.Black, rect1);
+            //string text1 = "Victory!";
+            //
+            //Rectangle rect1 = new Rectangle(0, 0, Set.CanvasWidth, Set.CanvasHeight);
+            //stringFormat.Alignment = StringAlignment.Center;
+            //stringFormat.LineAlignment = StringAlignment.Center;
+            //g.DrawString(text1, VictoryFont, Brushes.Blue, rect1, stringFormat);
+            //g.DrawRectangle(Pens.Black, rect1);
         }
         public void WriteMoveNumber(Graphics g)
         {
@@ -353,7 +360,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
         {
             Graphics g = e.Graphics;
             RectangleF Center = new RectangleF(Set.CanvasWidth / 2, Set.CanvasHeight / 2, Set.CanvasWidth, Set.CanvasHeight / 2);
-            g.Clear(Color.White);
+            g.Clear(Color.Black);
             if (Con.Playing)
             {
                 DrawBoard(g);
@@ -365,38 +372,81 @@ namespace TestWindowsFormsApp_.NET_Framework_
                 DrawVictory(g);
                 EnableContinueButton();
             }
+            else
+            {
+                DisableContinueButton();
+            }
+            
         }
         public void EnableContinueButton()
         {
-            ContinueButton.Enabled = true;
-            ContinueButton.Visible = true;
+            VictoryScreen.Enabled = true;
+            VictoryScreen.Visible = true;
+        }
+        public void DisableContinueButton()
+        {
+            VictoryScreen.Enabled = false;
+            VictoryScreen.Visible = false;
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
             if (Con.Victory)
             {
-                ContinueButton.Enabled = true;
-                ContinueButton.Visible = true;
+                VictoryScreen.Enabled = true;
+                VictoryScreen.Visible = true;
             }
             
         }
 
         public void ActivateLevelSelector()
         {
+            LeftScreen.BackgroundImage = Data.TutorialImage;
+            RightScreen.BackgroundImage = Data.GoalImage;
+            foreach(Control control in LevelSelectorPanel.Controls)
+            {
+                if(control.GetType() == typeof(Button))
+                {
+                    if(Con.PlayedLevels.Contains(Convert.ToInt32(control.Tag) - 1)) 
+                    {
+                        control.BackgroundImage = Data.BlueButtonImage;
+                    }
+                    else
+                    {
+                        control.BackgroundImage = Data.GrayButtonImage;
+                    }
+                    if (Con.PlayedLevels.Contains(Convert.ToInt32(control.Tag) ))
+                    {
+                        control.BackgroundImage = Data.GreenButtonImage;
+                    }
+                    if(Convert.ToInt32(control.Tag) == -1)
+                    {
+                        control.BackgroundImage = Data.EditorButtonImage;
+                    }
+                }
+            }
             LevelSelectorPanel.Visible = true;
             LevelSelectorPanel.Enabled = true;
         }
-            
+        public void DeactivateEditorOverlay()
+        {
+            if (EditorOverlay != null)
+            {
+                EditorOverlay.Enabled = false;
+                EditorOverlay.Visible = false;
+            }
+        }     
         public void RefreshBoard()
         {
             pictureBox1.Refresh();
         }
         private void ContinueButton_Click(object sender, EventArgs e)
         {
+            Data.PlaySound(Data.ButtonClickSound, Data.SoundType.MenuSFX, 1);
             Con.Playing = false;
             Con.Victory = false;
-            ContinueButton.Enabled = false;
-            ContinueButton.Visible = false;
+            Con.PlayedLevels.Add(Con.CurrentLevel);
+            DisableContinueButton();
+            DeactivateEditorOverlay();
             ActivateLevelSelector();
         }
     }

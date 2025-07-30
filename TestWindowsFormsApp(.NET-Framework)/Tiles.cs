@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace TestWindowsFormsApp_.NET_Framework_
 {
@@ -42,7 +43,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
         }
         public override Image GetImage()
         {
-            return Sprites.HeadImage;
+            return Data.HeadImage;
         }
         public Head(int Xarg, int Yarg) : base(Xarg, Yarg)
         {
@@ -61,7 +62,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
         }
         public override Image GetImage()
         {
-            return Sprites.BodyImage;
+            return Data.BodyImage;
         }
         public Body(int Xarg, int Yarg) : base(Xarg, Yarg)
         {
@@ -80,7 +81,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
         }
         public override Image GetImage()
         {
-            return Sprites.WallImage;
+            return Data.WallImage;
         }
         public Wall(int Xarg, int Yarg) : base(Xarg, Yarg)
         {
@@ -101,7 +102,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
         }
         public override Image GetImage()
         {
-            return Sprites.EmptyImage;
+            return Data.EmptyImage;
         }
         public Empty(int Xarg, int Yarg) : base(Xarg, Yarg)
         {
@@ -129,7 +130,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
         public int GrowthValue { get; set; }
         public override Image GetImage()
         {
-            return Sprites.FoodImage;
+            return Data.FoodImage;
         }
         public Edible(int Xarg, int Yarg, int GrowthValuearg) : base(Xarg, Yarg)
         {
@@ -162,7 +163,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
         }
         public override Image GetImage()
         {
-            return Sprites.UnMuncherImage;
+            return Data.UnMuncherImage;
         }
         public UnMuncher(int Xarg, int Yarg) : base(Xarg, Yarg)
         {
@@ -181,7 +182,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
         }
         public override Image GetImage()
         {
-            return Sprites.MuncherImage;
+            return Data.MuncherImage;
         }
         
         public Muncher(int Xarg, int Yarg) : base(Xarg, Yarg)
@@ -191,6 +192,29 @@ namespace TestWindowsFormsApp_.NET_Framework_
         public Muncher() : base()
         {
 
+        }
+    }
+    internal class Mover : Movable
+    {
+        public int DeltaX = 0;
+        public int DeltaY = 0;
+        public override Tile CreateSameType()
+        {
+            return new Mover(DeltaX, DeltaY);
+        }
+        public override Image GetImage()
+        {
+            return Data.FoodImage;
+        }
+        public Mover(int deltaX, int deltaY) : base()
+        {
+            DeltaX = deltaX;
+            DeltaY = deltaY;
+        }
+        public Mover(int xargs, int yargs, int deltaX, int deltaY) : base(xargs, yargs)
+        {
+            DeltaX = deltaX;
+            DeltaY = deltaY;
         }
     }
     internal abstract class SecondaryTile : Tile
@@ -217,7 +241,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
         }
         public override Image GetImage()
         {
-            return Sprites.YesVicImage;
+            return Data.YesVicImage;
         }
         public VictoryTile() : base()
         {

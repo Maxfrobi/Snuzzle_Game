@@ -40,8 +40,38 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.Win32.Registry, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Registry.4.7.0\lib\net461\Microsoft.Win32.Registry.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.2.2.1\lib\net472\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Asio, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Asio.2.2.1\lib\netstandard2.0\NAudio.Asio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Core, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Core.2.2.1\lib\netstandard2.0\NAudio.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Midi, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Midi.2.2.1\lib\netstandard2.0\NAudio.Midi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Wasapi, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.Wasapi.2.2.1\lib\netstandard2.0\NAudio.Wasapi.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinForms, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.WinForms.2.2.1\lib\net472\NAudio.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.WinMM, Version=2.2.1.0, Culture=neutral, PublicKeyToken=e279aa5131008a41, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.WinMM.2.2.1\lib\netstandard2.0\NAudio.WinMM.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,6 +83,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio.cs" />
     <Compile Include="Control.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -64,22 +95,24 @@
     <Compile Include="Levels.cs" />
     <Compile Include="Program.cs" />
     <EmbeddedResource Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Sprites.cs" />
     <Compile Include="Tiles.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -122,6 +155,201 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\SpriteFolder\SnuzzleYesVic.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\SpriteFolder\SnuzzleUnVic-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\SpriteFolder\SnuzzleYesVic-2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\SpriteFolder\SnuzzleUnVic_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\SpriteFolder\SnuzzleYesVic_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\SpriteFolder\SnuzzleUnVic_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\SpriteFolder\SnuzzleYesVic_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Death By Glamour %28part 1%29.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Death By Glamour %28part 1%291.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Death By Glamour %28part 1%292.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shuffle2.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shuffle3.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shuffle4.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wall1.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BackGroundMusic1.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shuffle1.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shuffle2.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shuffle3.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Shuffle4.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wall1.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_10.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_8.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_7.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_6.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_4.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_3.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_2.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_1.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wall.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wall2.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Wvhiit.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VictoryBackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ContinueButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TutorialScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\TutorialSmall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GoalScreen.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\EditorButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GrayButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\GreenButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BlueButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DefaultButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Height.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Width.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Build.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImportButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImportText.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BuildLevelExplanation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ImportExplanation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\DesignExplanation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ExportExplanation.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Button_Click.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VictorySound.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\VictoryTileActivation.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_11.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_101.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_21.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_31.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_41.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_61.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_71.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Option1_81.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Move1.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Move2.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Move3.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Move4.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Move5.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

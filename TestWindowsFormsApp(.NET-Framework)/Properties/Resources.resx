@@ -118,6 +118,69 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="BackGroundMusic1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BackGroundMusic1.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BlueButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BlueButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Build" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Build.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="BuildLevelExplanation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\BuildLevelExplanation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Button_Click" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Button_Click.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="ContinueButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ContinueButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DefaultButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DefaultButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DesignExplanation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DesignExplanation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="EditorButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\EditorButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ExportExplanation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ExportExplanation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GoalScreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GoalScreen.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="GrayButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\GrayButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Height" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Height.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImportButton" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImportButton.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImportExplanation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImportExplanation.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="ImportText" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\ImportText.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Move1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Move1.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Move2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Move2.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Move3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Move3.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Move4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Move4.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Move5" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Move5.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="SnuzzleBody" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>SpriteFolder\SnuzzleBody.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -139,10 +202,40 @@
   <data name="SnuzzleUnVic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>SpriteFolder\SnuzzleUnVic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="SnuzzleUnVic_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>SpriteFolder\SnuzzleUnVic_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="SnuzzleWall" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>SpriteFolder\SnuzzleWall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="SnuzzleYesVic" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>SpriteFolder\SnuzzleYesVic.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="SnuzzleYesVic_3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>SpriteFolder\SnuzzleYesVic_3.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="TutorialSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\TutorialSmall.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VictoryBackground" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VictoryBackground.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="VictorySound" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VictorySound.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="VictoryTileActivation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\VictoryTileActivation.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Wall1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Wall1.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Wall2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Wall2.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="Width" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Width.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Wvhiit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Wvhiit.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
