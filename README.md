@@ -14,7 +14,7 @@ TLDR:
 This only fails if a textbox is currently selected (Esc no longer works) or the game freezes (in which case Alt + F4 causes a prompt asking “Do you want to close the program because it is not responding?”. You can click "yes")
 In case everything else fails, you should always be able to "**Alt + Tab**" to a different Window, such as Task Manager.
 
-**1. How to open the game:**<br><br>In this repo there is a file titled "Snuzzle_Game.exe". If you are on windows, you can download it and then open it to run it. 
+**1. How to open the game:**<br><br>In this repo there is a file titled "Snuzzle_Game_Executable.exe". If you are on windows, you can download it and then open it to run it. 
 There are a few reasons this may malfunction:
 - **Windows might think this file might be a virus**. As a general rule, **DO NOT OPEN “.EXE” FILES YOU DO NOT TRUST**. But if you trust me, AND you trust that this file has not been tampered with by someone else, you can click "Options" and "Open Anyway". If not, I totally understand and hope to show you the game in person someday. (If you have coding experience, you can also download the sourcecode and take a look to convince yourself there is nothing nefarious before running it.)
 - You are not running Windows
