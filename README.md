@@ -21,6 +21,7 @@ There are a few reasons this may malfunction:
 - **Or something else happens** that I haven't discovered yet. Please reach out if this happens!
 
 Things to note: When you open the game, a colorful screen will appear alongside a black console window (this one may be covered by the colorful screen). The console window is useful for the level editor and can be ignored for now. Try using “Alt + Tab” to switch between different windows, to verify that both are present. 
+Also note that I recommend using Visual Studio (not VS Code) if you want to tinker with the source code, as it's what I used to code this game and as such it is the format that everything is set up in. No doubt it's possible to open and fiddle with this in another code editor, but there's probably some hassle attached to that. 
 
 **2. How to win the game:**<br><br>The goal of the game is to **complete all the levels**.
 You complete a level by **covering all of the white dotted "Victory Tiles"**, turning them into yellow full-bordered Victory Tiles.<br>If you are a personal friend of mine and you can't figure it out, gladly call me and I'll try to explain it better :P
