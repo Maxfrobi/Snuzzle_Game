@@ -230,8 +230,9 @@ namespace TestWindowsFormsApp_.NET_Framework_
             // 
             // timer1
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            //this.timer1.Enabled = true;
+            //this.timer1.Interval = 500;
+            //this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // ContinueButton
             // 
@@ -292,7 +293,7 @@ namespace TestWindowsFormsApp_.NET_Framework_
             this.RightToLeftLayout = true;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

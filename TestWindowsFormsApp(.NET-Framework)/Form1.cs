@@ -259,10 +259,6 @@ namespace TestWindowsFormsApp_.NET_Framework_
             
             //pictureBox1.Refresh();
         }
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            
-        }
         public void DrawBoard(Graphics g)
         {
             if (!(GS.Board == null))
@@ -388,15 +384,14 @@ namespace TestWindowsFormsApp_.NET_Framework_
             VictoryScreen.Enabled = false;
             VictoryScreen.Visible = false;
         }
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (Con.Victory)
-            {
-                VictoryScreen.Enabled = true;
-                VictoryScreen.Visible = true;
-            }
-            
-        }
+        //private void timer1_Tick(object sender, EventArgs e)
+        //{
+        //    if (Con.Victory)
+        //    {
+        //        VictoryScreen.Enabled = true;
+        //        VictoryScreen.Visible = true;
+        //    }
+        //}
 
         public void ActivateLevelSelector()
         {
