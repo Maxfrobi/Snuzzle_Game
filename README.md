@@ -59,3 +59,4 @@ If you have any suggestions for interesting tiles or game mechanics, please let 
 - Portals
 - Patrick's Parabox ripoff ideas (awesome game btw)
 
+7. KNOWN ISSUES:<br><br>On my Windows 11 laptop all of the pixel-locations are messed up (tutorial screen is not where it should be etc.). I assume it either has something to do with Windows 11 itself or some screen resolution difference on my laptop (although it claims to have the same 1920 by 1080). Either way, if the text is all shifted wrong, its probably this issue and I won't be able to resolve it soon (if ever).  
